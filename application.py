@@ -31,10 +31,17 @@ def allowed_file(filename):
 def index():
     return render_template("index.html")
 
-
 @application.route('/uploads/<filename>')
 def send_file(filename):
+    print('served image:',os.path.join(cwd, UPLOAD_FOLDER, filename))
     return send_from_directory(os.path.join(cwd, UPLOAD_FOLDER), filename)
+
+@application.route('/purge', methods=['POST'])
+def purge():
+    uploads = os.listdir(os.path.join(cwd, UPLOAD_FOLDER))
+    if len(uploads)>0:
+        for image in uploads:
+            os.remove(os.path.join(cwd, UPLOAD_FOLDER, image))
 
 @application.route('/uploader', methods=['POST'])
 def upload_file():
@@ -55,18 +62,9 @@ def upload_file():
                 return render_template("retry_input.html",
                                        message = 'Oops please upload dog photos only')
             else:
-                print('top 4 breeds and probabilities')
-                print(pred_df.head())
+                # print('top 4 breeds and probabilities')
+                # print(pred_df.head())
                 petfinder_recs = pf.get_dogs(pred_df,zip)
-                # rec_breed = [predictions]
-                # cheat_list = ['Bloodhound', 'Neapolitan+Mastiff', 'Dogue+de+Bordeaux']
-                # breed_links = [
-                #     "https://www.petfinder.com/search/dogs-for-adoption/us/or/" +
-                #     zip + "?breed%5B0%5D=" + breed + "&distance=Anywhere" for breed in cheat_list]
-                # breeds_dict = [{
-                #     'breed':rec_breeds[i],
-                #     'probabilty':prediction_proba[i],
-                #     'link':rec_links[i]} for i in range(len(breed_links))]
                 return render_template("output.html",
                                        filename=filename,
                                        petfinder_recs=petfinder_recs,

@@ -44,7 +44,6 @@ def make_prediction(path):
         print("You don't look like a dog, maybe a human? Let's see what kind of dog you would be!")
         return pd.DataFrame()
 
-    print('According to my model, you are a:')
     payload = {
         "instances": [{'input_image': img.reshape(image_size, image_size, 3).tolist()}],
         "signature_name": "serving_default"

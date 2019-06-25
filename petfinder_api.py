@@ -43,7 +43,7 @@ class Petfinder:
 
     def get_response(self, breed, zip):
         url = base_api_url.format(breed=breed, zip=zip)
-        print('API call: ',url)
+        # print('API call: ',url)
         response = requests.get(url, headers=self.header)
         return response
 
@@ -61,7 +61,6 @@ class Petfinder:
                 breed_api = breed
             breed_api = breed_api.replace(' or ', ' / ').replace(' ', '+').replace(' / ', '%2f')
             response = self.get_response(breed_api, zip)
-            print('response status:', response.status_code)
             if response.status_code != 200:
                 print('Bad response. Response code:', response.status_code, 'Reason:', response.reason)
                 print('attempting to get new header token')

@@ -17,11 +17,9 @@
             /* The image used */
             background-image: url("../static/dog_background2.jpg");
 
-            /* Add the blur effect */
-        {#filter: brightness(.25);#}
-
             /* Full height */
             height: 800px;
+
             /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;
@@ -29,14 +27,19 @@
         }
 
         /* Position text in the middle of the page/image */
-        .bg-text {
-            width: 400px;
-            position: relative;
-            left: 50%;
-            top: 50px;
-            transform: translate(-200px, 0);
+        .main-center-div {
+            transform: translate(0, 50px);
             color: white;
             text-align: center;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .bg-grey {
+            background-color: #e1e4e8 !important;
         }
     </style>
     <!-- Custom styles for this template -->
@@ -69,12 +72,6 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container d-flex justify-content-between">
             <a href="/" class="navbar-brand d-flex align-items-center">
-                {#                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"#}
-                {#                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2"#}
-                {#                     viewBox="0 0 24 24" focusable="false">#}
-                {#                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>#}
-                {#                    <circle cx="12" cy="13" r="4"/>#}
-                {#                </svg>#}
                 <strong>Home</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
@@ -86,14 +83,14 @@
 </header>
 <body>
 <div class="bg-image">
-    <div class="bg-text">
+    <div class="main-center-div">
         <h1 class="jumbotron-heading">DogNudger</h1>
         <p class="lead">Upload a dog photo and find similar looking breeds available for adoption near you:</p>
         {% block retry_message %}{% endblock %}
         <form action="/uploader" method=post enctype="multipart/form-data">
             <input type="file" name="file"/>
             <br><br>
-            <p>Zip Code: <input type="text" type="number" name="zip"/></p>
+            <p>Zip Code: <input type="text" style="width:80px" type="number" name="zip"/></p>
             <input type="submit" name="submit_dog" class="btn btn-primary my-2" id="submit_dog"
                    value="Find Similar Dogs!">
 
@@ -128,7 +125,7 @@
 <script>
 
     var el = document.getElementById("submit_dog");
-    var search_html_block = '<center> <img src="../static/loading2.gif" style="width:500px;height:281px;"><br>Finding similar dog breeds now. This may take a moment...  </center> '
+    var search_html_block = '<img src="../static/loading2.gif" style="width:500px;height:281px;position:center"><br>Finding similar dog breeds now.<br>This may take a moment...'
 
     el.addEventListener("click", function () {
         document.getElementById("input_div").innerHTML = search_html_block;

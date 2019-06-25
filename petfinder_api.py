@@ -69,7 +69,7 @@ class Petfinder:
                 print('response status:', response.status_code)
                 if response.status_code != 200:
                     print('2nd 401 response, possibly bad credentials')
-                    return False
+                    return []
             listings = json.loads(response.text)['animals']
             if len(listings) == 0:
                 print('no local dogs found for', breed_api)

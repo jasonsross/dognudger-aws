@@ -74,8 +74,8 @@ def upload_file():
                 if len(petfinder_recs)==0:
                     return render_template(
                         "retry_input.html",
-                        message='''Sorry, the Petfinder API connection is currently down.
-                        Please try again later.'''
+                        message='''Sorry, no similar breeds found nearby or the Petfinder API connection is down.
+                        Please try a different photo or come back later.'''
                     )
                 return render_template("output.html",
                                        filename=filename,

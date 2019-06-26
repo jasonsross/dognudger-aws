@@ -50,6 +50,7 @@ class Petfinder:
     def get_dogs(self, pred_df, zip):
         petfinder_recs = []
         count = 0
+        empty_calls = 0
         ids = []  # track listing ids across breeds so don't pull same dog twice
         for i, pred_row in pred_df.iterrows():
             breed = pred_row['pred_breed']
@@ -69,11 +70,15 @@ class Petfinder:
                 print('response status:', response.status_code)
                 if response.status_code != 200:
                     print('2nd 401 response, possibly bad credentials')
-                    return []
+                    return petfinder_recs
             listings = json.loads(response.text)['animals']
             if len(listings) == 0:
-                print('no local dogs found for', breed_api)
-                continue
+                empty_calls += 1
+                print('no local dogs found for', breed_api, 'no dog calls:', empty_calls)
+                if empty_calls >= 25:
+                    break
+                else:
+                    continue
             # Gather 3 listings for the breed.
             # Skip repeated id and lacking photos.
             rec = {'breed': breed,

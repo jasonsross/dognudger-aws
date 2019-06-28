@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="icon" href="../static/favicon.png">
     <title>DogNudger</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
     <!-- Bootstrap core CSS -->
@@ -15,23 +16,23 @@
 
         .bg-image {
             /* The image used */
-            background-image: url("../static/dog_background2.jpg");
+            background-image: url("../static/background_dog.jpg");
 
             /* Full height */
             height: 800px;
 
             /* Center and scale the image nicely */
-            background-position: center;
+            background-position: top;
             background-repeat: no-repeat;
             background-size: cover;
         }
 
-        /* Position text in the middle of the page/image */
+
         .main-center-div {
-            transform: translate(0, 50px);
             color: white;
-            text-align: center;
+            height: 100%;
             width: 100%;
+            text-align: center;
             padding-right: 15px;
             padding-left: 15px;
             margin-right: auto;
@@ -83,23 +84,25 @@
 </header>
 <body>
 <div class="bg-image">
-    <div class="main-center-div">
-        <h1 class="jumbotron-heading">DogNudger</h1>
-        <p class="lead">Upload a dog photo and find similar looking breeds available for adoption near you:</p>
-        {% block retry_message %}{% endblock %}
-        <form action="/uploader" method=post enctype="multipart/form-data">
-            <input type="file" name="file"/>
+        <div class="main-center-div">
             <br><br>
-            <p>Zip Code: <input type="text" style="width:80px" type="number" name="zip"/></p>
-            <input type="submit" name="submit_dog" class="btn btn-primary my-2" id="submit_dog"
-                   value="Find Similar Dogs!">
+            <h1 class="jumbotron-heading">DogNudger</h1>
+            <p class="lead">Upload a dog photo and find similar looking breeds available for adoption near you:</p>
+            {% block retry_message %}{% endblock %}
+            <form action="/uploader" method=post enctype="multipart/form-data">
+                <input type="file" name="file"/>
+                <br><br>
+                <p>Zip Code: <input type="text" style="width:80px" type="number" name="zip"/></p>
+                <input type="submit" name="submit_dog" class="btn btn-primary my-2" id="submit_dog"
+                       value="Find Similar Dogs!">
 
-        </form>
+            </form>
+            <br><br>
 
-        {% block uploaded_img %}
-            <div id="input_div"></div>
-        {% endblock %}
-    </div>
+            {% block uploaded_img %}
+                <div id="input_div"></div>
+            {% endblock %}
+        </div>
 </div>
 {% block dog_links %}
 {% endblock %}

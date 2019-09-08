@@ -16,7 +16,6 @@ base_api_url = """ https://api.petfinder.com/v2/animals?type=dog&breed={breed}&l
 with open('petfinder_breed_converter.json', 'r') as f:
     breed_converter = json.load(f)
 
-
 class Petfinder:
 
     def __init__(self):

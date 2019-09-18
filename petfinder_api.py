@@ -42,7 +42,7 @@ class Petfinder:
 
     def get_response(self, breed, zip):
         url = base_api_url.format(breed=breed, zip=zip)
-        # print('API call: ',url)
+        print('API call: ',url)
         response = requests.get(url, headers=self.header)
         return response
 

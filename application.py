@@ -23,19 +23,23 @@ application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 pf = Petfinder()
 
+
 # check file is ok
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Initial page
 @application.route('/', methods=['GET', 'POST'])
 def index():
     return render_template("index.html")
 
+# finding uploaded photos
 @application.route('/uploads/<filename>')
 def send_file(filename):
     print('served image:',os.path.join(cwd, UPLOAD_FOLDER, filename))
     return send_from_directory(os.path.join(cwd, UPLOAD_FOLDER), filename)
 
+# method to purge all previous uploaded folders
 @application.route('/purge', methods=['POST'])
 def purge():
     uploads = os.listdir(os.path.join(cwd, UPLOAD_FOLDER))
@@ -43,6 +47,7 @@ def purge():
         for image in uploads:
             os.remove(os.path.join(cwd, UPLOAD_FOLDER, image))
 
+# called when user presses upload button
 @application.route('/uploader', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
@@ -56,7 +61,6 @@ def upload_file():
             if (len(zip)!=5) or not zip.isdigit():
                 return render_template("retry_input.html",
                                        message='Oops please enter a valid Zip')
-
             try:
                 pred_df = make_prediction(filepath)
             except:

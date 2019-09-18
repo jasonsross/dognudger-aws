@@ -9,11 +9,16 @@
     <link rel="icon" href="../static/favicon.png">
     <title>DogNudger</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
 
+    <!-- Custom styles for this template -->
+    <link href="../static/album.css" rel="stylesheet">
+
+    <!-- Jason's custom styles -->
+    <style>
         .bg-image {
             /* The image used */
             background-image: url("../static/background_dog.jpg");
@@ -26,8 +31,6 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-
-
         .main-center-div {
             color: white;
             height: 100%;
@@ -38,13 +41,10 @@
             margin-right: auto;
             margin-left: auto;
         }
-
         .bg-grey {
             background-color: #e1e4e8 !important;
         }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="../static/album.css" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144962695-1"></script>
@@ -52,7 +52,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-144962695-1');
     </script>
 
@@ -93,21 +92,23 @@
         </div>
     </div>
 </header>
+
 <body>
 <div class="bg-image">
         <div class="main-center-div">
             <br><br>
             <h1 class="jumbotron-heading">DogNudger</h1>
             <p class="lead">Upload a dog photo and find similar looking breeds available for adoption near you:</p>
-            {% block retry_message %}{% endblock %}
+            {% block retry_message %}
+            {% endblock %}
             <form action="/uploader" method=post enctype="multipart/form-data">
                 <input type="file" name="file"/>
                 <br><br>
                 <p>Zip Code: <input type="text" style="width:80px" type="number" name="zip"/></p>
                 <input type="submit" name="submit_dog" class="btn btn-primary my-2" id="submit_dog"
                        value="Find Similar Dogs!">
-
             </form>
+
             <br><br>
 
             {% block uploaded_img %}
@@ -118,6 +119,7 @@
 {% block dog_links %}
 {% endblock %}
 </body>
+
 <footer class="text-muted">
     <div class="container">
         <p class="float-right">
@@ -126,6 +128,8 @@
         <p> &copy; DogNudger 2019</p>
     </div>
 </footer>
+
+<!-- more bootstrap stuff -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -133,18 +137,15 @@
 <script src="../static/js/bootstrap.bundle.min.js"
         integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
         crossorigin="anonymous">
-
 </script>
 
+<!-- dog jumping loading gif -->
 <script>
-
     var el = document.getElementById("submit_dog");
     var search_html_block = '<img src="../static/loading2.gif" style="width:500px;height:281px;position:center"><br>Finding similar dog breeds now.<br>This may take a moment...'
-
     el.addEventListener("click", function () {
         document.getElementById("input_div").innerHTML = search_html_block;
     });
-
 </script>
 
 </html>

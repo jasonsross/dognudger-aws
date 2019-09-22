@@ -18,7 +18,7 @@ targets = pd.read_csv('breeds_list_new.csv', header=None, squeeze=True).tolist()
 num_classes = len(targets) + 1
 
 def path_to_tensor(img_path, preprocessor, display_image=False):
-    img = image.load_img(img_path, target_size=(image_size, image_size))
+    img = image.load_img(img_path, target_size=((image_size, image_size)))
     img = image.img_to_array(img)
     img = np.expand_dims(img, axis=0)  # adds a 4th dimension that is essentially batchsize=1
     return preprocessor(img)

@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import render_template
 from flask import request, render_template, flash, redirect, send_from_directory
-import pandas as pd
 from image_model import make_prediction
 from petfinder_api import Petfinder
 from werkzeug.utils import secure_filename
@@ -9,7 +8,6 @@ from image_model import make_prediction
 import os
 from dotenv import load_dotenv
 load_dotenv('.env')
-import numpy as np
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 UPLOAD_FOLDER = 'uploads/'
@@ -63,7 +61,8 @@ def upload_file():
                                        message='Oops please enter a valid Zip')
             try:
                 pred_df = make_prediction(filepath)
-            except:
+            except Exception:
+                print(Exception)
                 return render_template("retry_input.html",
                                        message='''Sorry the breed classifier model is currently down.
                                        Blame Google and try again later''')
